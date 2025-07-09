@@ -1,0 +1,9 @@
+
+#Get rooms
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/rooms
+
+###
+
+# Health Check
+GET {{baseUrl}}/health
