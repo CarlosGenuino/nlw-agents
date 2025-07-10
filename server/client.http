@@ -1,11 +1,13 @@
 
 #Get rooms
+# @name getRooms
 @baseUrl = http://localhost:3000
 GET {{baseUrl}}/rooms
 
 ###
 
 # Create Room
+# @name createRoom
 POST {{baseUrl}}/rooms 
 Accept: application/json
 Content-Type: application/json
@@ -14,8 +16,15 @@ Content-Type: application/json
     "name": "Sala de teste",
     "description": "A room for testing purposes"
 }
+
 ###
 
+@roomId = {{getRooms.response.body.$[0].id}}
+###
+# Get room questions
+GET {{baseUrl}}/rooms/{{roomId}}/questions
+
+###
 # Health Check
 GET {{baseUrl}}/health
 

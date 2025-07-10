@@ -9,6 +9,7 @@ import {
 import { env } from './env.ts'
 import { getRoomsRoute } from './http/routes/get-rooms.ts'
 import { postRoomsRoute } from './http/routes/create-rooms.ts'
+import { getRoomsQuestionsRoute } from './http/routes/get-rooms-questions.ts'
 
 const app = fastify({
   logger: true,
@@ -27,6 +28,7 @@ app.get('/health', () => {
 
 app.register(getRoomsRoute)
 app.register(postRoomsRoute)
+app.register(getRoomsQuestionsRoute)
 
 app.listen({
   port: env.PORT,
