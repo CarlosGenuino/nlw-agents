@@ -15,7 +15,7 @@ async function getRoomsFromDatabase() {
     .select({
       id: schema.rooms.id,
       name: schema.rooms.name,
-      questionName: count(schema.questions.id)
+      questionCount: count(schema.questions.id)
     })
     .from(schema.rooms)
     .leftJoin(schema.questions, eq(schema.rooms.id, schema.questions.room_id))

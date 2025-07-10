@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 
 type GetRoomsApiResponse = Array<{
   id: string
-  nome: string
+  name: string
+  questionCount: number
 }>
 
 export function CreateRoom() {
@@ -24,7 +25,7 @@ export function CreateRoom() {
       <div className="flex flex-col gap-1">
         {data?.map((room) => (
           <Link key={room.id} to={`/room/${room.id}`}>
-            {room.nome}
+            {room.name} {room.questionCount}
           </Link>
         ))}
       </div>
