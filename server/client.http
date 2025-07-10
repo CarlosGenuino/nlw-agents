@@ -19,10 +19,19 @@ Content-Type: application/json
 
 ###
 
-@roomId = {{getRooms.response.body.$[0].id}}
+@roomId = {{createRoom.response.body.$.roomId}}
 ###
 # Get room questions
 GET {{baseUrl}}/rooms/{{roomId}}/questions
+
+###
+# Create a new question
+POST {{baseUrl}}/rooms/{{roomId}}/questions
+Content-Type: application/json
+
+{
+  "question": "Qual a melhor forma de aprender NodeJS?"
+}
 
 ###
 # Health Check
