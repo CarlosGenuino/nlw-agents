@@ -1,9 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import { useCreateRoom } from '@/http/use-create-room'
 import { Button } from './ui/button'
-import { Card, CardContent, CardDescription, CardHeader } from './ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from './ui/card'
 import {
   Form,
   FormControl,
@@ -13,15 +19,16 @@ import {
   FormMessage,
 } from './ui/form'
 import { Input } from './ui/input'
+import { Textarea } from './ui/textarea'
 
 const createRoomSchema = z.object({
-  name: z.string().min(3, { message: 'Inclua ao menos 3 characteres' }),
+  name: z.string().min(3, { message: 'Inclua no mínimo 3 caracteres' }),
   description: z.string(),
 })
 
 type CreateRoomFormData = z.infer<typeof createRoomSchema>
 
-export default function CreateRoomForm() {
+export function CreateRoomForm() {
   const { mutateAsync: createRoom } = useCreateRoom()
 
   const createRoomForm = useForm<CreateRoomFormData>({
@@ -34,14 +41,19 @@ export default function CreateRoomForm() {
 
   async function handleCreateRoom({ name, description }: CreateRoomFormData) {
     await createRoom({ name, description })
+
     createRoomForm.reset()
   }
+
   return (
     <Card>
-      <CardHeader>Criar Sala</CardHeader>
-      <CardDescription>
-        Crie uma nova sala para fazer perguntas para I.A
-      </CardDescription>
+      <CardHeader>
+        <CardTitle>Criar sala</CardTitle>
+        <CardDescription>
+          Crie uam nova sala para começar a fazer perguntas e receber respostas
+          da I.A.
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <Form {...createRoomForm}>
           <form
@@ -51,27 +63,31 @@ export default function CreateRoomForm() {
             <FormField
               control={createRoomForm.control}
               name="name"
-              render={(field) => {
+              render={({ field }) => {
                 return (
                   <FormItem>
                     <FormLabel>Nome da sala</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Digite o nome da sala" />
+                      <Input
+                        {...field}
+                        placeholder="Digite o nome da sala..."
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )
               }}
             />
+
             <FormField
               control={createRoomForm.control}
               name="description"
-              render={(field) => {
+              render={({ field }) => {
                 return (
                   <FormItem>
                     <FormLabel>Descrição</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="" />
+                      <Textarea {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -80,7 +96,7 @@ export default function CreateRoomForm() {
             />
 
             <Button className="w-full" type="submit">
-              Criar Sala
+              Criar sala
             </Button>
           </form>
         </Form>

@@ -11,7 +11,7 @@ import {
 import { useRooms } from '@/http/use-get-rooms'
 import { dayjs } from '@/lib/dayjs'
 
-export default function RoomList() {
+export function RoomList() {
   const { data, isLoading } = useRooms()
   return (
     <Card>

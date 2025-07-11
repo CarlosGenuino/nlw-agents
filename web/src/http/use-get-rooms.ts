@@ -3,7 +3,7 @@ import type { GetRoomsListResponse } from './types/get-room-list-response'
 
 export function useRooms() {
   return useQuery({
-    queryKey: ['createRoom'],
+    queryKey: ['get-rooms'],
     queryFn: async () => {
       const result = await fetch('http://localhost:3000/rooms')
       const rooms: GetRoomsListResponse = await result.json()
