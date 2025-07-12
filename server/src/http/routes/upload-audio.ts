@@ -37,12 +37,10 @@ export const uploadAudioRoute: FastifyPluginCallbackZod = (app) => {
           embeddings,
         })
         .returning()
-        console.log('Chunk saved successfully.')
 
       const chunk = result[0]
 
       if (!chunk) {
-        console.log('Chunk not saved successfully.')
         throw new Error('Erro ao salvar chunk de áudio')
       }
 
