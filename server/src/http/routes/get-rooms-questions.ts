@@ -15,9 +15,8 @@ export const getRoomsQuestionsRoute: FastifyPluginCallbackZod = (app) => {
     },
     async (request, reply) => {
       const { roomId } = request.params;
-      console.log(roomId);
       const rooms = await db
-        .select({
+        .select({ 
           id: schema.questions.id,
           question: schema.questions.question,
           response: schema.questions.response,
